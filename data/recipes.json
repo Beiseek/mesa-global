@@ -1,0 +1,11 @@
+[
+{
+  "model": "blog.recipe",
+  "pk": 1,
+  "fields": {
+    "title": "Traditional Mole Poblano",
+    "slug": "traditional-mole-poblano",
+    "region": 1,
+    "category": 1,
+    "description": "A complex, rich sauce with over 20 ingredients including chocolate, served traditionally with turkey or chicken.",
+    "history": 

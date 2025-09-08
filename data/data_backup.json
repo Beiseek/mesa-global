@@ -1,0 +1,290 @@
+[
+{
+  "model": "blog.region",
+  "pk": 1,
+  "fields": {
+    "name": "Mexico",
+    "slug": "mexico",
+    "description": "Rich culinary traditions from ancient Aztec and Maya civilizations combined with Spanish influences.",
+    "image": ""
+  }
+},
+{
+  "model": "blog.region",
+  "pk": 2,
+  "fields": {
+    "name": "Italy",
+    "slug": "italy",
+    "description": "Mediterranean cuisine featuring fresh ingredients, pasta, and regional specialties.",
+    "image": ""
+  }
+},
+{
+  "model": "blog.region",
+  "pk": 3,
+  "fields": {
+    "name": "India",
+    "slug": "india",
+    "description": "Diverse spices and cooking techniques vary dramatically across different regions.",
+    "image": ""
+  }
+},
+{
+  "model": "blog.region",
+  "pk": 4,
+  "fields": {
+    "name": "Thailand",
+    "slug": "thailand",
+    "description": "Balance of sweet, sour, salty, and spicy flavors in every dish.",
+    "image": ""
+  }
+},
+{
+  "model": "blog.region",
+  "pk": 5,
+  "fields": {
+    "name": "France",
+    "slug": "france",
+    "description": "Sophisticated culinary techniques and emphasis on quality ingredients.",
+    "image": ""
+  }
+}
+]
+[
+{
+  "model": "blog.category",
+  "pk": 1,
+  "fields": {
+    "name": "Main Dishes",
+    "slug": "main-dishes",
+    "description": "Hearty main courses and entrees"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 2,
+  "fields": {
+    "name": "Appetizers",
+    "slug": "appetizers",
+    "description": "Small plates and starters"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 3,
+  "fields": {
+    "name": "Desserts",
+    "slug": "desserts",
+    "description": "Sweet treats and traditional desserts"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 4,
+  "fields": {
+    "name": "Soups",
+    "slug": "soups",
+    "description": "Comforting soups and broths"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 5,
+  "fields": {
+    "name": "Street Food",
+    "slug": "street-food",
+    "description": "Popular street food and snacks"
+  }
+}
+]
+[
+{
+  "model": "blog.tag",
+  "pk": 1,
+  "fields": {
+    "name": "Spicy",
+    "slug": "spicy"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 2,
+  "fields": {
+    "name": "Vegetarian",
+    "slug": "vegetarian"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 3,
+  "fields": {
+    "name": "Traditional",
+    "slug": "traditional"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 4,
+  "fields": {
+    "name": "Quick",
+    "slug": "quick"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 5,
+  "fields": {
+    "name": "Family Recipe",
+    "slug": "family-recipe"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 6,
+  "fields": {
+    "name": "Festival Food",
+    "slug": "festival-food"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 7,
+  "fields": {
+    "name": "Comfort Food",
+    "slug": "comfort-food"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 8,
+  "fields": {
+    "name": "Healthy",
+    "slug": "healthy"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 9,
+  "fields": {
+    "name": "Ancient Recipe",
+    "slug": "ancient-recipe"
+  }
+}
+]
+[
+{
+  "model": "blog.recipe",
+  "pk": 1,
+  "fields": {
+    "title": "Traditional Mole Poblano",
+    "slug": "traditional-mole-poblano",
+    "region": 1,
+    "category": 1,
+    "description": "A complex, rich sauce with over 20 ingredients including chocolate, served traditionally with turkey or chicken.",
+    "history": [
+{
+  "model": "blog.article",
+  "pk": 1,
+  "fields": {
+    "title": "How Migration Shapes Culinary Evolution: The Story of Global Fusion",
+    "slug": "how-migration-shapes-culinary-evolution",
+    "article_type": "blog",
+    "region": null,
+    "excerpt": "Exploring how human migration patterns have created the fusion cuisines we love today, from Peruvian-Japanese Nikkei to Indian-Chinese dishes.",
+    "content": "<p>Throughout history, human migration has been one of the most powerful forces shaping global cuisine. When people move, they carry their culinary traditions with them, but they also adapt to new ingredients, techniques, and local tastes. This dynamic process has given birth to some of the world's most beloved fusion cuisines.</p>\n\n<h3>The Science of Culinary Adaptation</h3>\n\n<p>When immigrants settle in new countries, they face immediate challenges: familiar ingredients may be unavailable or expensive, and local tastes might differ dramatically from home. This necessity drives innovation. Chinese immigrants to India created dishes like Hakka noodles and Manchurian chicken - foods that exist nowhere in China but have become integral to Indian-Chinese cuisine.</p>\n\n<p>Similarly, Japanese immigrants to Peru in the early 20th century couldn't find traditional ingredients like miso or short-grain rice. They adapted by using local Peruvian ingredients, creating Nikkei cuisine - a fusion that combines Japanese techniques with Peruvian flavors, giving us dishes like tiradito and nikkei sushi.</p>\n\n<h3>Economic and Social Factors</h3>\n\n<p>Migration-driven cuisine evolution isn't just about ingredient availability - it's deeply influenced by economic and social factors. Italian immigrants to America created Italian-American cuisine by adapting their traditional recipes to local tastes and available ingredients. Dishes like chicken parmigiana and spaghetti with meatballs were created to appeal to American palates while maintaining Italian cooking principles.</p>\n\n<blockquote>\n\"Food is the great connector. It transcends language barriers and cultural differences, becoming a bridge between the old world and the new.\" - Chef Marcus Samuelsson\n</blockquote>\n\n<h3>Modern Migration and Digital Influence</h3>\n\n<p>Today's migration patterns are creating even more complex fusion cuisines. Korean immigrants have brought kimchi to Mexican tacos, creating Korean-Mexican fusion. Vietnamese immigrants have adapted their pho to local tastes in different countries, resulting in variations you'll find nowhere in Vietnam.</p>\n\n<p>Social media and food blogs accelerate this process, allowing fusion recipes to spread globally within months rather than generations. A dish created by a Vietnamese-American chef in Los Angeles can influence Vietnamese restaurants in Australia within weeks.</p>\n\n<h3>Preserving Authenticity While Embracing Change</h3>\n\n<p>The challenge for immigrant communities is maintaining their culinary identity while adapting to new environments. Many families develop \"home versions\" and \"restaurant versions\" of traditional dishes - keeping authentic recipes alive within families while serving adapted versions to broader audiences.</p>\n\n<p>This dual approach has proven essential for cultural preservation. The most successful fusion cuisines maintain core principles of their origin culture while embracing local innovations.</p>\n\n<h3>Looking Forward</h3>\n\n<p>As climate change and economic opportunities continue to drive global migration, we can expect even more culinary innovation. African cuisines are beginning to influence global food scenes as African diaspora communities grow worldwide. Plant-based diets are pushing traditional meat-based cuisines to innovate with vegetables and alternative proteins.</p>\n\n<p>The story of migration and food is ultimately a story of human resilience and creativity. Every fusion dish tells a story of adaptation, survival, and the universal human desire to maintain connections to home while building new communities.</p>",
+    "featured_image": "",
+    "gallery_image_1": "",
+    "gallery_image_2": "",
+    "author_name": "",
+    "author_bio": "",
+    "meta_title": "How Migration Shapes Culinary Evolution: The Story of Global",
+    "meta_description": "Exploring how human migration patterns have created the fusion cuisines we love today, from Peruvian-Japanese Nikkei to Indian-Chinese dishes.",
+    "created_at": "2025-09-04T19:38:23.153Z",
+    "updated_at": "2025-09-04T19:38:23.153Z",
+    "is_published": true,
+    "featured": false,
+    "tags": []
+  }
+},
+{
+  "model": "blog.article",
+  "pk": 2,
+  "fields": {
+    "title": "Bread Traditions Around the World: Unity in Diversity",
+    "slug": "bread-traditions-around-the-world",
+    "article_type": "culture",
+    "region": null,
+    "excerpt": "From naan to sourdough, discover how different cultures have developed unique bread-making traditions using similar basic ingredients.",
+    "content": "<p>Bread, in its countless forms, represents one of humanity's most fundamental foods. Despite vast cultural differences, nearly every civilization has developed some form of bread, using locally available grains and adapting techniques to their environment and needs.</p>\n\n<h3>The Universal Language of Grain</h3>\n\n<p>At its core, bread requires only grain, water, and time. Yet from these simple ingredients, human ingenuity has created thousands of variations. In Ethiopia, injera is made from teff flour, creating a spongy, slightly sour flatbread that serves both as food and plate. In Mexico, corn tortillas represent a 9,000-year-old tradition that predates wheat cultivation in the Americas.</p>\n\n<p>The choice of grain often reflects geographical limitations and cultural preferences. Barley was the grain of choice in ancient Egypt and Greece, while rice-based breads developed across Asia. Rye bread became essential in Northern European countries where wheat struggled to grow in harsh climates.</p>\n\n<h3>Fermentation: Nature's Gift to Bread</h3>\n\n<p>The discovery of fermentation revolutionized bread-making, though it likely happened by accident. Wild yeasts naturally occurring in the environment would begin fermenting grain mixtures left exposed to air. Different regions developed different fermentation cultures based on their local microbial environments.</p>\n\n<p>San Francisco sourdough gets its distinctive tang from Lactobacillus sanfranciscensis, a bacteria strain unique to that region's fog-cooled environment. Similarly, German rye breads develop their characteristic flavors from centuries-old starter cultures passed down through generations of bakers.</p>\n\n<blockquote>\n\"Bread is the warmest, kindest of words. Write it always with a capital letter, like your own name.\" - Russian Proverb\n</blockquote>\n\n<h3>Bread as Social Connector</h3>\n\n<p>Beyond nutrition, bread plays crucial social and spiritual roles across cultures. In many Middle Eastern and Mediterranean cultures, breaking bread together creates bonds of hospitality and trust. The Arabic phrase \"we have shared bread and salt\" signifies an unbreakable bond between people.</p>\n\n<p>Jewish challah bread marks the Sabbath with its braided shape symbolizing unity and continuity. Hindu cultures consider bread-making a sacred act, with specific prayers offered during kneading and baking. Indigenous American corn breads often incorporate ceremonial elements, connecting the community to ancestral traditions.</p>\n\n<h3>Techniques Shaped by Environment</h3>\n\n<p>Climate and available fuel sources heavily influenced bread-making techniques. In the Mediterranean, wood-fired communal ovens became centers of village life, with families bringing their bread to be baked together. Desert cultures developed flatbreads that could be cooked quickly on hot stones or metal surfaces.</p>\n\n<p>In Northern climates, dense, long-lasting breads like German pumpernickel or Scandinavian crispbreads were developed to withstand harsh winters. These breads could be stored for months, providing sustenance when fresh baking wasn't possible.</p>\n\n<h3>Modern Globalization and Tradition</h3>\n\n<p>Today's global food culture allows us to experience bread traditions from around the world. Japanese shokupan's pillowy texture influences American sandwich breads. Indian naan has become as common as pizza in many Western cities. French baguette techniques are taught in cooking schools worldwide.</p>\n\n<p>Yet this globalization also threatens traditional methods. Industrial bread production prioritizes speed and uniformity over flavor and nutrition. Many traditional grains and techniques risk being lost as commercial varieties dominate markets.</p>\n\n<h3>The Artisan Revival</h3>\n\n<p>Fortunately, a growing movement of artisan bakers worldwide is reviving traditional techniques. Ancient grains like einkorn, emmer, and spelt are being reintroduced. Traditional fermentation methods are being taught to new generations of bakers committed to preserving these cultural treasures.</p>\n\n<p>Home baking surged during the COVID-19 pandemic, with people rediscovering the meditative process of kneading dough and the satisfaction of creating bread from basic ingredients. This renewed interest in bread-making represents more than a hobby - it's a reconnection with fundamental human traditions.</p>\n\n<p>As we look to the future, bread continues to evolve. Gluten-free breads serve those with dietary restrictions. Plant-based enrichments replace traditional dairy and eggs. Climate-adapted grains are being developed for changing growing conditions.</p>\n\n<p>Yet regardless of these innovations, bread remains what it has always been: a testament to human creativity, community, and our ability to transform simple ingredients into something greater than the sum of their parts.</p>",
+    "featured_image": "",
+    "gallery_image_1": "",
+    "gallery_image_2": "",
+    "author_name": "",
+    "author_bio": "",
+    "meta_title": "Bread Traditions Around the World: Unity in Diversity",
+    "meta_description": "From naan to sourdough, discover how different cultures have developed unique bread-making traditions using similar basic ingredients.",
+    "created_at": "2025-09-04T19:38:23.161Z",
+    "updated_at": "2025-09-04T19:38:23.161Z",
+    "is_published": true,
+    "featured": false,
+    "tags": []
+  }
+},
+{
+  "model": "blog.article",
+  "pk": 3,
+  "fields": {
+    "title": "Food as Diplomacy: Meals That Changed History",
+    "slug": "food-as-diplomacy-meals-that-changed-history",
+    "article_type": "blog",
+    "region": null,
+    "excerpt": "From Nixon's visit to China to state dinners that prevented wars, explore how carefully planned meals have shaped international relations.",
+    "content": "<p>Throughout history, some of the world's most significant diplomatic breakthroughs have happened not in formal meeting rooms, but around dinner tables. The careful selection of menus, the symbolism of shared meals, and the informal atmosphere of dining have often achieved what formal negotiations could not.</p>\n\n<h3>The Great Banquet Diplomacy</h3>\n\n<p>One of the most famous examples of culinary diplomacy occurred during President Nixon's historic 1972 visit to China. Premier Zhou Enlai's choice to serve both Chinese and Western dishes at the welcoming banquet was deeply symbolic. The menu included Peking duck alongside Western-style soup, representing the bridge between two vastly different cultures.</p>\n\n<p>The banquet's success lay not just in the food, but in the act of sharing it. Nixon's willingness to use chopsticks and try unfamiliar dishes showed respect for Chinese culture, while Zhou's inclusion of familiar Western elements demonstrated Chinese hospitality and understanding.</p>\n\n<h3>The Camp David Accords and Middle Eastern Cuisine</h3>\n\n<p>President Jimmy Carter's choice to include Middle Eastern dishes during the 1978 Camp David negotiations between Egyptian President Anwar Sadat and Israeli Prime Minister Menachem Begin was strategically brilliant. By serving foods familiar to both leaders, Carter created an atmosphere of comfort and shared cultural heritage.</p>\n\n<p>The informal meals, often eaten together without protocol officers present, allowed the leaders to connect on a human level. Sadat and Begin discovered shared memories of similar dishes from their youth, creating unexpected moments of warmth during tense negotiations.</p>\n\n<blockquote>\n\"The way to a man's heart is through his stomach, but the way to peace might be through his palate.\" - Anonymous diplomatic observer\n</blockquote>\n\n<h3>State Dinners as Cultural Bridges</h3>\n\n<p>Modern state dinners have evolved into carefully choreographed cultural exchanges. When French President Emmanuel Macron visited the White House in 2018, the menu deliberately included both American and French elements - highlighting the historical alliance while respecting both culinary traditions.</p>\n\n<p>The choice of American wine for the dinner was particularly symbolic, acknowledging French influence on American winemaking while showcasing American agricultural achievements. Such details, often overlooked by casual observers, send powerful messages to diplomatic communities.</p>\n\n<h3>Breaking Bread to Break Barriers</h3>\n\n<p>The Islamic tradition of sharing salt creates a bond of protection and hospitality that has influenced Middle Eastern diplomacy for centuries. During the Ottoman Empire, elaborate feasts were used to display power while also creating obligations of reciprocity among guests.</p>\n\n<p>Similar traditions exist worldwide: in many African cultures, refusing offered food is considered an insult that can end negotiations before they begin. Understanding these cultural nuances has often meant the difference between diplomatic success and failure.</p>\n\n<h3>The United Nations and Culinary Diplomacy</h3>\n\n<p>The United Nations regularly uses food as a diplomatic tool. National delegations often host cultural food events to showcase their countries and build informal relationships with other diplomats. These casual interactions, often over shared meals, frequently lead to formal cooperation agreements.</p>\n\n<p>The UN's \"Friendship Bench\" program pairs diplomats from different countries for informal lunches, explicitly using food as a mechanism for building personal relationships that translate into political understanding.</p>\n\n<h3>Modern Challenges and Opportunities</h3>\n\n<p>Today's diplomatic dining faces new challenges: dietary restrictions, religious considerations, and environmental concerns all factor into menu planning. Vegan state dinners are becoming more common, reflecting growing environmental awareness and inclusivity concerns.</p>\n\n<p>The COVID-19 pandemic forced diplomacy online, highlighting how much we rely on shared meals for relationship building. Virtual wine tastings and cooking demonstrations attempted to replicate the bonding experience of eating together, with mixed success.</p>\n\n<h3>The Psychology of Shared Meals</h3>\n\n<p>Research confirms what diplomats have long known: people who eat together are more likely to trust each other and find common ground. The act of sharing food triggers evolutionary responses that promote cooperation and reduce aggression.</p>\n\n<p>Neuroscientists have found that eating activates the brain's reward centers, creating positive associations with present company. This biological response explains why \"breaking bread\" has become synonymous with peace-making across cultures.</p>\n\n<h3>Looking to the Future</h3>\n\n<p>As climate change and food security become major global challenges, culinary diplomacy may play an even larger role in international relations. Shared meals focusing on sustainable ingredients and traditional preservation techniques could become platforms for discussing environmental cooperation.</p>\n\n<p>The growing global food movement also creates opportunities for citizen diplomacy - cultural food exchanges, international cooking classes, and food-focused sister city programs all contribute to international understanding at grassroots levels.</p>\n\n<p>Ultimately, food diplomacy succeeds because it appeals to our most basic human needs: sustenance, community, and recognition. In a world often divided by politics and ideology, the universal need to eat provides common ground where understanding can begin.</p>",
+    "featured_image": "",
+    "gallery_image_1": "",
+    "gallery_image_2": "",
+    "author_name": "",
+    "author_bio": "",
+    "meta_title": "Food as Diplomacy: Meals That Changed History",
+    "meta_description": "From Nixon's visit to China to state dinners that prevented wars, explore how carefully planned meals have shaped international relations.",
+    "created_at": "2025-09-04T19:38:23.168Z",
+    "updated_at": "2025-09-04T19:38:23.168Z",
+    "is_published": true,
+    "featured": false,
+    "tags": []
+  }
+},
+{
+  "model": "blog.article",
+  "pk": 4,
+  "fields": {
+    "title": "The Art of Fermentation: Ancient Wisdom for Modern Health",
+    "slug": "the-art-of-fermentation-ancient-wisdom",
+    "article_type": "culture",
+    "region": null,
+    "excerpt": "Discover how traditional fermentation techniques from cultures worldwide are revolutionizing our understanding of gut health and sustainable food production.",
+    "content": "<p>Long before humans understood bacteria and microorganisms, they discovered that controlled decomposition could transform food into something more nutritious, flavorful, and longer-lasting. Today, as we face challenges of health, sustainability, and food security, these ancient fermentation traditions offer profound wisdom.</p>\n\n<h3>The Universal Discovery</h3>\n\n<p>Fermentation appears in virtually every culture because it solves fundamental human needs: preservation without refrigeration, enhanced nutrition, and improved digestibility. Korean kimchi, German sauerkraut, Indian dosas, and African injera all represent independent discoveries of similar principles by different civilizations.</p>\n\n<p>What's remarkable is how consistently these cultures developed not just functional fermented foods, but traditions that recognized their health benefits. Traditional Chinese medicine has long prescribed fermented foods for digestive health, while Indian Ayurveda considers fermented foods essential for maintaining proper gut bacteria.</p>\n\n<h3>The Science Behind Ancient Wisdom</h3>\n\n<p>Modern research has validated what traditional cultures knew intuitively. Fermented foods contain beneficial bacteria (probiotics) that support digestive health and immune function. The fermentation process also creates new nutrients: vitamin K2 in fermented dairy, vitamin B12 in some fermented vegetables, and enhanced bioavailability of minerals.</p>\n\n<p>Lacto-fermentation, used in making traditional pickles and sauerkraut, produces lactobacillus bacteria that can survive stomach acid and colonize the intestine. These bacteria produce short-chain fatty acids that reduce inflammation and may protect against various diseases.</p>\n\n<blockquote>\n\"In fermentation, we see the beautiful partnership between humans and microorganisms - a collaboration that has sustained us for millennia.\" - Sandor Katz, fermentation expert\n</blockquote>\n\n<h3>Cultural Preservation Through Microorganisms</h3>\n\n<p>Each region's fermented foods contain unique microbial communities adapted to local environments. Tibetan yak cheese contains bacteria that thrive at high altitudes. Japanese miso develops differently based on regional temperature and humidity patterns. These microbial terroirs are as distinctive as wine regions.</p>\n\n<p>Sadly, industrialization threatens these microbial ecosystems. Commercial pasteurization kills beneficial bacteria, while standardized starter cultures replace diverse local strains. When traditional fermentation practices disappear, we lose not just recipes but entire ecosystems of beneficial microorganisms.</p>\n\n<h3>Fermentation and Sustainability</h3>\n\n<p>Traditional fermentation offers solutions to modern sustainability challenges. Fermented foods require no refrigeration during production and have extended shelf lives, reducing energy consumption and food waste. Plant-based fermentation can create protein-rich foods from locally available ingredients.</p>\n\n<p>Indonesian tempeh transforms soybeans into a complete protein through fermentation, providing meat-like nutrition with a fraction of the environmental impact. African fermented legume pastes serve similar functions, creating nutrient-dense foods from drought-resistant crops.</p>\n\n<h3>The Ritual and Community Aspects</h3>\n\n<p>In many cultures, fermentation involves community participation and ceremonial elements. Japanese families gather annually to make miso, with recipes and techniques passed down through generations. The process becomes a way of maintaining cultural identity and family bonds.</p>\n\n<p>Ethiopian women often ferment injera batter communally, sharing starter cultures and techniques. This sharing ensures genetic diversity in fermentation cultures while strengthening social connections. The timing of fermentation - often several days - requires patience and planning that connects people to natural rhythms.</p>\n\n<h3>Modern Applications and Innovations</h3>\n\n<p>Contemporary chefs and food scientists are rediscovering fermentation's potential. Restaurants like Copenhagen's Noma have elevated fermentation to haute cuisine, while food entrepreneurs are creating new products based on traditional techniques.</p>\n\n<p>Plant-based meat alternatives increasingly use fermentation to develop complex flavors and textures. Cellular agriculture companies are exploring fermentation for producing animal proteins without animals. These innovations build on ancient knowledge while addressing modern dietary needs.</p>\n\n<h3>The Home Fermentation Revival</h3>\n\n<p>Interest in home fermentation has exploded as people seek healthier, more sustainable food options. Online communities share starter cultures and techniques, creating global networks of fermentation enthusiasts. This democratization of knowledge helps preserve traditional methods while encouraging innovation.</p>\n\n<p>The COVID-19 pandemic accelerated this trend as people had more time at home and greater interest in immune-supporting foods. Kombucha, kimchi, and sourdough bread became pandemic staples for many households.</p>\n\n<h3>Challenges and Opportunities</h3>\n\n<p>Despite growing interest, fermentation faces challenges in our sanitized modern world. Fear of \"bad\" bacteria leads many to avoid fermented foods or rely only on pasteurized versions. Food safety regulations sometimes favor industrial processes over traditional methods.</p>\n\n<p>Education is crucial for overcoming these barriers. Understanding that humans evolved alongside beneficial microorganisms helps people appreciate fermentation's safety when done properly. Traditional fermentation methods have sustained communities for thousands of years without modern sterile environments.</p>\n\n<h3>The Future of Fermentation</h3>\n\n<p>As we face climate change and growing global populations, fermentation offers scalable solutions. Fermented foods can be produced locally using available ingredients, reducing transportation costs and carbon emissions. They provide nutrition security by extending food shelf life and enhancing nutrient availability.</p>\n\n<p>The convergence of traditional knowledge and modern science promises exciting developments. Researchers are identifying specific probiotic strains for targeted health benefits while food artisans explore new flavor possibilities through controlled fermentation.</p>\n\n<p>Ultimately, fermentation represents a profound partnership between humans and microorganisms - one that has sustained us throughout history and offers hope for a healthier, more sustainable future. By honoring traditional wisdom while embracing scientific understanding, we can unlock fermentation's full potential for modern challenges.</p>",
+    "featured_image": "",
+    "gallery_image_1": "",
+    "gallery_image_2": "",
+    "author_name": "",
+    "author_bio": "",
+    "meta_title": "The Art of Fermentation: Ancient Wisdom for Modern Health",
+    "meta_description": "Discover how traditional fermentation techniques from cultures worldwide are revolutionizing our understanding of gut health and sustainable food production.",
+    "created_at": "2025-09-04T19:38:23.174Z",
+    "updated_at": "2025-09-04T19:38:23.174Z",
+    "is_published": true,
+    "featured": false,
+    "tags": []
+  }
+},
+{
+  "model": "blog.article",
+  "pk": 5,
+  "fields": {
+    "title": "Street Food Chronicles: The Soul of City Cuisine",
+    "slug": "street-food-chronicles-soul-of-city-cuisine",
+    "article_type": "story",
+    "region": null,
+    "excerpt": "A journey through the world's street food capitals reveals how these humble vendors preserve culinary traditions while creating new fusion flavors.",
+    "content": 

@@ -1,0 +1,47 @@
+[
+{
+  "model": "blog.category",
+  "pk": 1,
+  "fields": {
+    "name": "Main Dishes",
+    "slug": "main-dishes",
+    "description": "Hearty main courses and entrees"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 2,
+  "fields": {
+    "name": "Appetizers",
+    "slug": "appetizers",
+    "description": "Small plates and starters"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 3,
+  "fields": {
+    "name": "Desserts",
+    "slug": "desserts",
+    "description": "Sweet treats and traditional desserts"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 4,
+  "fields": {
+    "name": "Soups",
+    "slug": "soups",
+    "description": "Comforting soups and broths"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 5,
+  "fields": {
+    "name": "Street Food",
+    "slug": "street-food",
+    "description": "Popular street food and snacks"
+  }
+}
+]

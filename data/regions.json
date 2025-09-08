@@ -1,0 +1,52 @@
+[
+{
+  "model": "blog.region",
+  "pk": 1,
+  "fields": {
+    "name": "Mexico",
+    "slug": "mexico",
+    "description": "Rich culinary traditions from ancient Aztec and Maya civilizations combined with Spanish influences.",
+    "image": ""
+  }
+},
+{
+  "model": "blog.region",
+  "pk": 2,
+  "fields": {
+    "name": "Italy",
+    "slug": "italy",
+    "description": "Mediterranean cuisine featuring fresh ingredients, pasta, and regional specialties.",
+    "image": ""
+  }
+},
+{
+  "model": "blog.region",
+  "pk": 3,
+  "fields": {
+    "name": "India",
+    "slug": "india",
+    "description": "Diverse spices and cooking techniques vary dramatically across different regions.",
+    "image": ""
+  }
+},
+{
+  "model": "blog.region",
+  "pk": 4,
+  "fields": {
+    "name": "Thailand",
+    "slug": "thailand",
+    "description": "Balance of sweet, sour, salty, and spicy flavors in every dish.",
+    "image": ""
+  }
+},
+{
+  "model": "blog.region",
+  "pk": 5,
+  "fields": {
+    "name": "France",
+    "slug": "france",
+    "description": "Sophisticated culinary techniques and emphasis on quality ingredients.",
+    "image": ""
+  }
+}
+]

@@ -23,6 +23,12 @@ echo "🔄 Running database migrations..."
 export DJANGO_SETTINGS_MODULE=mesa_global.settings_production
 python manage.py migrate
 
+# Load exported data (if new data exists)
+if [ -f "data/data_backup.json" ]; then
+    echo "📊 Loading exported data..."
+    python manage.py loaddata data/data_backup.json
+fi
+
 # Collect static files
 echo "📁 Collecting static files..."
 python manage.py collectstatic --noinput

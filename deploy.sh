@@ -110,6 +110,10 @@ python manage.py createsuperuser
 echo "📊 Loading initial data..."
 python manage.py load_initial_data
 
+# Load exported data
+echo "📊 Loading exported data..."
+python manage.py loaddata data/data_backup.json
+
 # Collect static files
 echo "📁 Collecting static files..."
 python manage.py collectstatic --noinput

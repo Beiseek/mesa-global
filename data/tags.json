@@ -1,0 +1,74 @@
+[
+{
+  "model": "blog.tag",
+  "pk": 1,
+  "fields": {
+    "name": "Spicy",
+    "slug": "spicy"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 2,
+  "fields": {
+    "name": "Vegetarian",
+    "slug": "vegetarian"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 3,
+  "fields": {
+    "name": "Traditional",
+    "slug": "traditional"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 4,
+  "fields": {
+    "name": "Quick",
+    "slug": "quick"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 5,
+  "fields": {
+    "name": "Family Recipe",
+    "slug": "family-recipe"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 6,
+  "fields": {
+    "name": "Festival Food",
+    "slug": "festival-food"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 7,
+  "fields": {
+    "name": "Comfort Food",
+    "slug": "comfort-food"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 8,
+  "fields": {
+    "name": "Healthy",
+    "slug": "healthy"
+  }
+},
+{
+  "model": "blog.tag",
+  "pk": 9,
+  "fields": {
+    "name": "Ancient Recipe",
+    "slug": "ancient-recipe"
+  }
+}
+]
