@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+
+{% block title %}International Recipes from Around the World - Mesa Global{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                <h1 class="display-5 mb-4">Authentic Recipes from Around the World</h1>
+                <p class="lead">
+                    Discover traditional dishes, cooking techniques, and the cultural stories behind every meal
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filters Section -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <form method="get" class="row g-3" id="filter-form">
+            <div class="col-lg-3 col-md-6">
+                <label class="form-label">Region</label>
+                <select name="region" class="form-select" onchange="this.form.submit()">
+                    <option value="">All Regions</option>
+                    {% for region in regions %}
+                        <option value="{{ region.slug }}" {% if current_region == region.slug %}selected{% endif %}>
+                            {{ region.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label class="form-label">Category</label>
+                <select name="category" class="form-select" onchange="this.form.submit()">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category.slug }}" {% if current_category == category.slug %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label class="form-label">Difficulty</label>
+                <select name="difficulty" class="form-select" onchange="this.form.submit()">
+                    <option value="">All Levels</option>
+                    {% for value, display in difficulties %}
+                        <option value="{{ value }}" {% if current_difficulty == value %}selected{% endif %}>
+                            {{ display }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+        
+        <!-- Active Filters -->
+        {% if current_region or current_category or current_difficulty %}
+        <div class="mt-3">
+            <span class="text-muted me-2">Active filters:</span>
+            {% if current_region %}
+                <span class="badge me-2" style="background: linear-gradient(135deg, #ff8c00, #ff6b35);">
+                    {% for region in regions %}
+                        {% if region.slug == current_region %}{{ region.name }}{% endif %}
+                    {% endfor %}
+                    <a href="?{% if current_category %}category={{ current_category }}&{% endif %}{% if current_difficulty %}difficulty={{ current_difficulty }}{% endif %}" class="text-white ms-1">×</a>
+                </span>
+            {% endif %}
+            {% if current_category %}
+                <span class="badge me-2" style="background: linear-gradient(135deg, #ff8c00, #ff6b35);">
+                    {% for category in categories %}
+                        {% if category.slug == current_category %}{{ category.name }}{% endif %}
+                    {% endfor %}
+                    <a href="?{% if current_region %}region={{ current_region }}&{% endif %}{% if current_difficulty %}difficulty={{ current_difficulty }}{% endif %}" class="text-white ms-1">×</a>
+                </span>
+            {% endif %}
+            {% if current_difficulty %}
+                <span class="badge me-2" style="background: linear-gradient(135deg, #ff8c00, #ff6b35);">
+                    {% for value, display in difficulties %}
+                        {% if value == current_difficulty %}{{ display }}{% endif %}
+                    {% endfor %}
+                    <a href="?{% if current_region %}region={{ current_region }}&{% endif %}{% if current_category %}category={{ current_category }}{% endif %}" class="text-white ms-1">×</a>
+                </span>
+            {% endif %}
+            <a href="{% url 'recipes' %}" class="btn btn-outline-secondary btn-sm">Clear All</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Recipes Grid -->
+<section class="py-5">
+    <div class="container">
+        {% if recipes %}
+            <div class="row">
+                {% for recipe in recipes %}
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                    <div class="card recipe-card h-100 shadow-sm">
+                        <div class="position-relative">
+                            {% if recipe.featured_image %}
+                                <img src="{{ recipe.featured_image.url }}" class="card-img-top" alt="{{ recipe.title }}">
+                            {% else %}
+                                <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=250&fit=crop&crop=center" class="card-img-top" alt="{{ recipe.title }}">
+                            {% endif %}
+                            <span class="badge position-absolute top-0 end-0 m-2">
+                                {{ recipe.region.name }}
+                            </span>
+                            <div class="position-absolute bottom-0 start-0 p-2">
+                                <div class="d-flex gap-2">
+                                    <span class="badge bg-dark">
+                                        <i class="fas fa-clock me-1"></i>{{ recipe.total_time }} min
+                                    </span>
+                                    <span class="badge bg-warning text-dark">
+                                        {{ recipe.get_difficulty_display }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">{{ recipe.title }}</h5>
+                                <small class="text-muted">{{ recipe.category.name }}</small>
+                            </div>
+                            <p class="card-text text-muted flex-grow-1">{{ recipe.description|truncatewords:20 }}</p>
+                            
+                            <!-- Recipe Info -->
+                            <div class="row text-center mb-3">
+                                <div class="col-4">
+                                    <small class="text-muted d-block"><i class="fas fa-prep me-1"></i>Prep</small>
+                                    <strong>{{ recipe.prep_time }}m</strong>
+                                </div>
+                                <div class="col-4">
+                                    <small class="text-muted d-block"><i class="fas fa-fire me-1"></i>Cook</small>
+                                    <strong>{{ recipe.cook_time }}m</strong>
+                                </div>
+                                <div class="col-4">
+                                    <small class="text-muted d-block"><i class="fas fa-users me-1"></i>Serves</small>
+                                    <strong>{{ recipe.servings }}</strong>
+                                </div>
+                            </div>
+                            
+                            <a href="{{ recipe.get_absolute_url }}" class="btn btn-primary mt-auto">
+                                <i class="fas fa-utensils me-2"></i>Get Recipe
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            {% if recipes.has_other_pages %}
+            <nav aria-label="Recipes pagination" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    {% if recipes.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% if current_region %}region={{ current_region }}&{% endif %}{% if current_category %}category={{ current_category }}&{% endif %}{% if current_difficulty %}difficulty={{ current_difficulty }}&{% endif %}page={{ recipes.previous_page_number }}">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    {% for num in recipes.paginator.page_range %}
+                        {% if recipes.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% elif num > recipes.number|add:'-3' and num < recipes.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?{% if current_region %}region={{ current_region }}&{% endif %}{% if current_category %}category={{ current_category }}&{% endif %}{% if current_difficulty %}difficulty={{ current_difficulty }}&{% endif %}page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if recipes.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% if current_region %}region={{ current_region }}&{% endif %}{% if current_category %}category={{ current_category }}&{% endif %}{% if current_difficulty %}difficulty={{ current_difficulty }}&{% endif %}page={{ recipes.next_page_number }}">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        {% else %}
+            <!-- No Results -->
+            <div class="text-center py-5">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h3>No recipes found</h3>
+                <p class="text-muted">Try adjusting your filters or search terms</p>
+                <a href="{% url 'recipes' %}" class="btn btn-primary">View All Recipes</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Recipe Suggestion CTA -->
+<section class="py-5 bg-light">
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h3 class="mb-4">Don't see your favorite recipe?</h3>
+                <p class="lead mb-4">
+                    Share your family's traditional recipe with our global community and help preserve culinary heritage.
+                </p>
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus me-2"></i>Submit Your Recipe
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Auto-submit form on filter change
+    document.addEventListener('DOMContentLoaded', function() {
+        const selects = document.querySelectorAll('#filter-form select');
+        selects.forEach(select => {
+            select.addEventListener('change', function() {
+                document.getElementById('filter-form').submit();
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,370 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Mesa Global - Share Your Recipe or Story{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                <h1 class="display-5 mb-4">Share Your Culinary Story</h1>
+                <p class="lead">
+                    Join our global community by sharing your family recipes, cultural food stories, or culinary experiences
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4">Submit Your Recipe or Story</h2>
+                        <p class="text-muted text-center mb-4">
+                            Help us preserve and share the world's culinary heritage by contributing your unique story
+                        </p>
+                        
+                        <form method="post" novalidate data-aos="fade-up">
+                            {% csrf_token %}
+                            
+                            <!-- Submission Type -->
+                            <div class="mb-4">
+                                {{ form.submission_type.label_tag }}
+                                {{ form.submission_type }}
+                                {% if form.submission_type.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.submission_type.errors.0 }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Personal Information -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    {{ form.name.label_tag }}
+                                    {{ form.name }}
+                                    {% if form.name.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.name.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    {{ form.email.label_tag }}
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.email.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- Title and Region -->
+                            <div class="row">
+                                <div class="col-md-8 mb-4">
+                                    {{ form.title.label_tag }}
+                                    {{ form.title }}
+                                    {% if form.title.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.title.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    {{ form.region.label_tag }}
+                                    {{ form.region }}
+                                    {% if form.region.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.region.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- Description -->
+                            <div class="mb-4">
+                                {{ form.description.label_tag }}
+                                {{ form.description }}
+                                {% if form.description.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.description.errors.0 }}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">
+                                    Brief overview of what you're sharing - this will help our editorial team understand your submission
+                                </div>
+                            </div>
+                            
+                            <!-- Content -->
+                            <div class="mb-4">
+                                {{ form.content.label_tag }}
+                                {{ form.content }}
+                                {% if form.content.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.content.errors.0 }}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">
+                                    <div id="recipe-help" style="display: none;">
+                                        <strong>For recipes, please include:</strong>
+                                        <ul class="small">
+                                            <li>Complete list of ingredients with measurements</li>
+                                            <li>Step-by-step cooking instructions</li>
+                                            <li>Preparation and cooking times</li>
+                                            <li>Number of servings</li>
+                                            <li>Any special techniques or tips</li>
+                                            <li>Cultural significance or family history</li>
+                                        </ul>
+                                    </div>
+                                    <div id="story-help" style="display: none;">
+                                        <strong>For stories, consider including:</strong>
+                                        <ul class="small">
+                                            <li>Personal connection to the food or tradition</li>
+                                            <li>Cultural or historical context</li>
+                                            <li>Memorable experiences or emotions</li>
+                                            <li>How the tradition has been passed down</li>
+                                            <li>Any changes or adaptations over time</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg px-5">
+                                    <i class="fas fa-paper-plane me-2"></i>Submit Your Contribution
+                                </button>
+                            </div>
+                            
+                            <!-- Privacy Note -->
+                            <div class="text-center mt-3">
+                                <small class="text-muted">
+                                    By submitting, you agree that your contribution may be published on Mesa Global with proper attribution. We respect your privacy and will only use your email to contact you about your submission.
+                                </small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Guidelines Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h2 class="section-title" data-aos="fade-up">Submission Guidelines</h2>
+                <div class="row">
+                    <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-utensils text-primary me-2"></i>Recipe Submissions
+                                </h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Traditional family recipes are especially welcome</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Include cultural context and personal stories</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Provide clear, detailed instructions</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mention any dietary restrictions or variations</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Share the story behind the dish</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-book-open text-primary me-2"></i>Story Submissions
+                                </h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Personal food memories and experiences</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Cultural food traditions and customs</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Migration and adaptation stories</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Interviews with family elders or chefs</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Historical context of dishes or ingredients</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-info-circle text-primary me-2"></i>What Happens Next?
+                                </h5>
+                                <div class="row">
+                                    <div class="col-md-4 text-center mb-3">
+                                        <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                                        <h6>Review</h6>
+                                        <p class="small text-muted">Our editorial team reviews your submission within 5-7 business days</p>
+                                    </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        <i class="fas fa-edit fa-2x text-primary mb-2"></i>
+                                        <h6>Collaboration</h6>
+                                        <p class="small text-muted">We may contact you for additional details, photos, or clarifications</p>
+                                    </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        <i class="fas fa-globe fa-2x text-primary mb-2"></i>
+                                        <h6>Publication</h6>
+                                        <p class="small text-muted">Your story gets featured on Mesa Global with full attribution</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Information -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="row">
+                    <div class="col-md-6 mb-4" data-aos="fade-up">
+                        <div class="card text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
+                                <h5>Email Us</h5>
+                                <p class="text-muted">For general inquiries or collaboration</p>
+                                <a href="mailto:hello@mesaglobal.com" class="btn btn-outline-primary">
+                                    hello@mesaglobal.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card text-center h-100">
+                            <div class="card-body">
+                                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                                <h5>Join Community</h5>
+                                <p class="text-muted">Connect with fellow food enthusiasts</p>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="#" class="btn btn-outline-primary btn-sm">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-outline-primary btn-sm">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-outline-primary btn-sm">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-title" data-aos="fade-up">Frequently Asked Questions</h2>
+                
+                <div class="accordion" id="faqAccordion" data-aos="fade-up">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                Can I submit recipes that aren't originally mine?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes! We welcome family recipes passed down through generations. Please include the source (grandmother, family friend, etc.) and any family history associated with the recipe.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Do I need to provide photos?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Photos are not required for initial submission, but they greatly enhance the appeal of published content. Our team can help arrange photography if your submission is accepted.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Will I be credited for my contribution?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Absolutely! All published content includes full attribution to the contributor. We believe in honoring the people who share their culinary heritage with our community.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                Can I submit content in languages other than English?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes! We accept submissions in multiple languages. Our editorial team can help with translation while preserving the authentic voice and cultural nuances of your story.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const submissionType = document.getElementById('id_submission_type');
+        const recipeHelp = document.getElementById('recipe-help');
+        const storyHelp = document.getElementById('story-help');
+        
+        function toggleHelp() {
+            const value = submissionType.value;
+            if (value === 'recipe') {
+                recipeHelp.style.display = 'block';
+                storyHelp.style.display = 'none';
+            } else if (value === 'story') {
+                recipeHelp.style.display = 'none';
+                storyHelp.style.display = 'block';
+            } else {
+                recipeHelp.style.display = 'none';
+                storyHelp.style.display = 'none';
+            }
+        }
+        
+        submissionType.addEventListener('change', toggleHelp);
+        toggleHelp(); // Initialize on page load
+    });
+</script>
+{% endblock %}

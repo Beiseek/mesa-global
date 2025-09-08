@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ region.name }} - Recipes & Cultural Stories - Mesa Global{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <nav aria-label="breadcrumb" class="mb-3">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'recipes' %}">Recipes</a></li>
+                        <li class="breadcrumb-item active">{{ region.name }}</li>
+                    </ol>
+                </nav>
+                <h1 class="display-4 mb-4">{{ region.name }}</h1>
+                {% if region.description %}
+                    <p class="lead">{{ region.description }}</p>
+                {% else %}
+                    <p class="lead">
+                        
+                            Discover the authentic flavors and culinary traditions of {{ region_name }}. 
+                            Explore traditional recipes, cultural stories, and the rich food heritage of this region.
+                        
+                    </p>
+                {% endif %}
+                <div class="d-flex gap-3 mt-4">
+                    <a href="{% url 'recipes' %}?region={{ region.slug }}" class="btn btn-primary">
+                        <i class="fas fa-utensils me-2"></i>View All Recipes
+                    </a>
+                    <a href="{% url 'articles' %}?region={{ region.slug }}" class="btn btn-outline-primary">
+                        <i class="fas fa-book me-2"></i>Read Stories
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                {% if region.image %}
+                    <img src="{{ region.image.url }}" alt="{{ region.name }}" 
+                         class="img-fluid rounded-3 shadow-lg">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop&crop=center" 
+                         alt="{{ region.name }} cuisine" class="img-fluid rounded-3 shadow-lg">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Stats -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-6 mb-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="d-flex flex-column align-items-center">
+                    <h3 class="text-primary mb-2">{{ recipes|length }}</h3>
+                    <p class="mb-0 text-muted">Recipes</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="d-flex flex-column align-items-center">
+                    <h3 class="text-primary mb-2">{{ articles|length }}</h3>
+                    <p class="mb-0 text-muted">Stories</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3" data-aos="fade-up" data-aos-delay="300">
+                <div class="d-flex flex-column align-items-center">
+                    <h3 class="text-primary mb-2">
+                        {% for recipe in recipes %}
+                            {% if forloop.first %}{{ recipe.total_time }}{% endif %}
+                        {% empty %}30{% endfor %}
+                    </h3>
+                    <p class="mb-0 text-muted">Avg. Cook Time (min)</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3" data-aos="fade-up" data-aos-delay="400">
+                <div class="d-flex flex-column align-items-center">
+                    <h3 class="text-primary mb-2">★★★★★</h3>
+                    <p class="mb-0 text-muted">Authentic Traditions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Recipes -->
+{% if recipes %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">
+            Traditional Recipes from {{ region_name }}
+        </h2>
+        <div class="row">
+            {% for recipe in recipes %}
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                <div class="card recipe-card h-100">
+                    <div class="position-relative">
+                        {% if recipe.featured_image %}
+                            <img src="{{ recipe.featured_image.url }}" class="card-img-top" alt="{{ recipe.title }}" style="height: 200px; object-fit: cover;">
+                        {% else %}
+                            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop&crop=center" class="card-img-top" alt="{{ recipe.title }}" style="height: 200px; object-fit: cover;">
+                        {% endif %}
+                        <span class="badge position-absolute top-0 end-0 m-2">{{ recipe.category.name }}</span>
+                        <div class="position-absolute bottom-0 start-0 p-2">
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-dark">
+                                    <i class="fas fa-clock me-1"></i>{{ recipe.total_time }}m
+                                </span>
+                                <span class="badge bg-warning text-dark">
+                                    {{ recipe.get_difficulty_display }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title">{{ recipe.title }}</h6>
+                        <p class="card-text small text-muted flex-grow-1">{{ recipe.description|truncatewords:15 }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">
+                                <i class="fas fa-users me-1"></i>{{ recipe.servings }}
+                            </small>
+                            <a href="{{ recipe.get_absolute_url }}" class="btn btn-primary btn-sm">
+                                Get Recipe
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if recipes|length >= 8 %}
+        <div class="text-center mt-4">
+            <a href="{% url 'recipes' %}?region={{ region.slug }}" class="btn btn-outline-primary btn-lg">
+                View All Recipes <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Cultural Stories -->
+{% if articles %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">
+            Cultural Stories from {{ region_name }}
+        </h2>
+        <div class="row">
+            {% for article in articles %}
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                <article class="card h-100">
+                                            <div class="row g-0 h-100">
+                            <div class="col-md-5">
+                                {% if article.featured_image %}
+                                    <img src="{{ article.featured_image.url }}" class="img-fluid h-100" 
+                                         alt="{{ article.title }}" style="object-fit: cover; min-height: 200px;">
+                                {% else %}
+                                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop&crop=center" class="img-fluid h-100" 
+                                         alt="{{ article.title }}" style="object-fit: cover; min-height: 200px;">
+                                {% endif %}
+                            </div>
+                        <div class="col-md-7">
+                            <div class="card-body d-flex flex-column h-100">
+                                <span class="badge bg-{{ article.article_type|default:'primary' }} mb-2 align-self-start">
+                                    {{ article.get_article_type_display }}
+                                </span>
+                                <h6 class="card-title">{{ article.title }}</h6>
+                                <p class="card-text flex-grow-1 small">{{ article.excerpt|truncatewords:20 }}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <small class="text-muted">{{ article.created_at|date:"M d" }}</small>
+                                    <a href="{{ article.get_absolute_url }}" class="btn btn-outline-primary btn-sm">
+                                        Read Story
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if articles|length >= 4 %}
+        <div class="text-center mt-4">
+            <a href="{% url 'articles' %}?region={{ region.slug }}" class="btn btn-outline-primary btn-lg">
+                View All Stories <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Cuisine Highlights -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">
+            {{ region_name }} Cuisine Highlights
+        </h2>
+        <div class="row">
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-seedling fa-3x text-primary mb-3"></i>
+                        <h5>Traditional Ingredients</h5>
+                        <p class="text-muted">
+                            
+                                Discover the authentic ingredients that define {{ region_name }} cuisine and learn about their cultural significance.
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-hands fa-3x text-primary mb-3"></i>
+                        <h5>Cooking Techniques</h5>
+                        <p class="text-muted">
+                            
+                                Explore time-honored cooking methods passed down through generations in {{ region_name }}.
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-calendar-alt fa-3x text-primary mb-3"></i>
+                        <h5>Festival Foods</h5>
+                        <p class="text-muted">
+                            
+                                Learn about special dishes prepared for celebrations and holidays in {{ region_name }}.
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Explore More Regions -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Explore Other Culinary Regions</h2>
+        <div class="row">
+            <div class="col-lg-2 col-md-4 col-6 mb-3" data-aos="fade-up" data-aos-delay="100">
+                <a href="#" class="btn btn-outline-primary w-100">Asia</a>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6 mb-3" data-aos="fade-up" data-aos-delay="150">
+                <a href="#" class="btn btn-outline-primary w-100">Europe</a>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6 mb-3" data-aos="fade-up" data-aos-delay="200">
+                <a href="#" class="btn btn-outline-primary w-100">Africa</a>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6 mb-3" data-aos="fade-up" data-aos-delay="250">
+                <a href="#" class="btn btn-outline-primary w-100">Americas</a>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6 mb-3" data-aos="fade-up" data-aos-delay="300">
+                <a href="#" class="btn btn-outline-primary w-100">Middle East</a>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6 mb-3" data-aos="fade-up" data-aos-delay="350">
+                <a href="#" class="btn btn-outline-primary w-100">Oceania</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contribution CTA -->
+<section class="py-5" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+    <div class="container text-center text-white">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h3 class="mb-4">
+                    Share Your {{ region_name }} Food Story
+                </h3>
+                <p class="lead mb-4">
+                    
+                        Do you have a family recipe or cultural story from {{ region_name }}? 
+                        Help us preserve and share these culinary traditions with the world.
+                    
+                </p>
+                <a href="{% url 'contact' %}" class="btn btn-light btn-lg">
+                    <i class="fas fa-plus me-2"></i>Contribute Your Story
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .badge.bg-story { background-color: #e74c3c !important; }
+    .badge.bg-interview { background-color: #3498db !important; }
+    .badge.bg-culture { background-color: #9b59b6 !important; }
+    .badge.bg-blog { background-color: #27ae60 !important; }
+</style>
+{% endblock %}

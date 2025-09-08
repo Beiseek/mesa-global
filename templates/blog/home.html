@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mesa Global - International Food & Culture Blog{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h1 class="display-4 mb-4">
+                    Welcome to <span class="text-primary">Mesa Global</span>
+                </h1>
+                <p class="lead mb-4">
+                    A place where we gather stories and recipes from around the world. Discover authentic flavors, cultural traditions, and the people behind every dish.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{% url 'recipes' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-utensils me-2"></i>Explore Recipes
+                    </a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-plus me-2"></i>Share Your Story
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="position-relative">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop&crop=center" 
+                         alt="International cuisine" class="img-fluid rounded-3 shadow-lg">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 ethnic-pattern rounded-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Articles Section -->
+{% if featured_articles %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Featured Stories</h2>
+        <div class="row">
+            {% for article in featured_articles %}
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                <div class="card h-100">
+                                            <div class="position-relative">
+                            {% if article.featured_image %}
+                                <img src="{{ article.featured_image.url }}" class="card-img-top" alt="{{ article.title }}">
+                            {% else %}
+                                <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=250&fit=crop&crop=center" class="card-img-top" alt="{{ article.title }}">
+                            {% endif %}
+                            <span class="badge position-absolute top-0 end-0 m-2">
+                                {{ article.get_article_type_display }}
+                            </span>
+                        </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text text-muted flex-grow-1">{{ article.excerpt|truncatewords:20 }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar me-1"></i>{{ article.created_at|date:"M d, Y" }}
+                            </small>
+                            <a href="{{ article.get_absolute_url }}" class="btn btn-outline-primary btn-sm">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Latest Recipes Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Latest Recipes</h2>
+        <div class="row">
+            {% for recipe in latest_recipes %}
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                <div class="card recipe-card h-100">
+                    <div class="position-relative">
+                        {% if recipe.featured_image %}
+                            <img src="{{ recipe.featured_image.url }}" class="card-img-top" alt="{{ recipe.title }}">
+                        {% else %}
+                            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=250&fit=crop&crop=center" class="card-img-top" alt="{{ recipe.title }}">
+                        {% endif %}
+                        <span class="badge">{{ recipe.region.name }}</span>
+                        <div class="position-absolute bottom-0 start-0 p-2">
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-dark">
+                                    <i class="fas fa-clock me-1"></i>{{ recipe.total_time }} min
+                                </span>
+                                <span class="badge bg-warning">
+                                    {{ recipe.get_difficulty_display }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ recipe.title }}</h5>
+                        <p class="card-text text-muted flex-grow-1">{{ recipe.description|truncatewords:15 }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">
+                                <i class="fas fa-users me-1"></i>{{ recipe.servings }} servings
+                            </small>
+                            <a href="{{ recipe.get_absolute_url }}" class="btn btn-primary btn-sm">
+                                Get Recipe
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'recipes' %}" class="btn btn-outline-primary btn-lg">
+                View All Recipes <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                 <img src="{% static 'img/1.jpg' %}" 
+                      alt="Cultural diversity in food" class="img-fluid rounded-3 shadow">
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <h2 class="mb-4">Our Mission</h2>
+                <p class="lead">
+                    Our mission is to celebrate the world's diverse culinary traditions by sharing recipes, stories, and cultural insights that connect people across borders.
+                </p>
+                <p>
+                    Through food, we aim to foster understanding, preserve heritage, and inspire a global community that sees gastronomy as a language of unity.
+                </p>
+                <a href="{% url 'about' %}" class="btn btn-primary">
+                    Learn More About Us <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Articles Section -->
+{% if latest_articles %}
+<section class="py-5 bg-light story-section" style="margin-bottom: 0 !important;">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Recent Stories</h2>
+        <div class="row">
+            {% for article in latest_articles %}
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                <article class="card h-100">
+                    {% if article.featured_image %}
+                        <img src="{{ article.featured_image.url }}" class="card-img-top" alt="{{ article.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop&crop=center" class="card-img-top" alt="{{ article.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-secondary mb-2 align-self-start">{{ article.get_article_type_display }}</span>
+                        <h6 class="card-title">{{ article.title }}</h6>
+                        <p class="card-text text-muted small flex-grow-1">{{ article.excerpt|truncatewords:12 }}</p>
+                        <a href="{{ article.get_absolute_url }}" class="btn btn-outline-primary btn-sm mt-auto">
+                            Read Story
+                        </a>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5" style="margin-top: 3rem !important;">
+            <a href="{% url 'articles' %}" class="btn btn-outline-primary btn-lg">
+                View All Stories <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA Section -->
+<section class="cta-section" style="background: linear-gradient(135deg, #ff8c00, #ff6b35); margin-top: 3rem !important; padding: 4rem 0 !important;">
+    <div class="container text-center text-white">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h2 class="mb-4">Join Our Global Culinary Community</h2>
+                <p class="lead mb-4">
+                    Have a family recipe or cultural food story to share? We'd love to hear from you and feature your contribution on Mesa Global.
+                </p>
+                <a href="{% url 'contact' %}" class="btn btn-light btn-lg">
+                    <i class="fas fa-plus me-2"></i>Share Your Recipe or Story
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

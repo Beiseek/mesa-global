@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Mesa Global - Our Mission & Story{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section position-relative" style="background-image: url('{% static 'img/662541.webp' %}'); background-size: cover; background-position: center; min-height: 30vh;">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(210, 105, 30, 0.7);"></div>
+    <div class="container position-relative">
+        <div class="row align-items-center" style="min-height: 30vh;">
+            <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                <h1 class="display-4 mb-4 text-white">About Mesa Global</h1>
+                <p class="lead text-white">
+                    Connecting cultures through the universal language of food
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-5" data-aos="fade-right">
+                        <h2 class="mb-4">Our Mission</h2>
+                        <p class="lead">
+                            Our mission is to celebrate the world's diverse culinary traditions by sharing recipes, stories, and cultural insights that connect people across borders.
+                        </p>
+                        <p>
+                            Through food, we aim to foster understanding, preserve heritage, and inspire a global community that sees gastronomy as a language of unity.
+                        </p>
+                    </div>
+                    <div class="col-lg-7" data-aos="fade-left">
+                         <img src="{% static 'img/2.jpg' %}" 
+                              alt="Cultural diversity in food" class="img-fluid rounded-3 shadow" style="width: 100%; height: 225px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Our Values</h2>
+        <div class="row">
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-globe fa-3x text-primary"></i>
+                    </div>
+                    <h4>Cultural Diversity</h4>
+                    <p>We celebrate the rich tapestry of global cuisines, honoring each culture's unique culinary traditions and the stories behind them.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-users fa-3x text-primary"></i>
+                    </div>
+                    <h4>Community</h4>
+                    <p>We believe in the power of shared meals and stories to bring people together, creating bridges across cultural divides.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-heart fa-3x text-primary"></i>
+                    </div>
+                    <h4>Authenticity</h4>
+                    <p>We strive to share authentic recipes and genuine stories, preserving the true essence of each culinary tradition.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Story Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right">
+                         <img src="{% static 'img/3.jpg' %}" 
+                              alt="People cooking together" class="img-fluid rounded-3 shadow">
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <h2 class="mb-4">How It All Started</h2>
+                        <p>
+                            Mesa Global was born from a simple observation: no matter where we come from, food is central to our identity, our memories, and our connections with others.
+                        </p>
+                        <p>
+                            As globalization brings us closer together, we wanted to create a space where these culinary stories could be shared, preserved, and celebrated. Each recipe tells a story—of migration, adaptation, tradition, and innovation.
+                        </p>
+                        <p>
+                            From a grandmother's secret spice blend passed down through generations to a chef's modern interpretation of a classic dish, every story matters in the grand tapestry of global cuisine.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Impact Section -->
+<section class="py-5 bg-light impact-section">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Our Impact</h2>
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-4">
+                    <h3 class="display-4 text-primary mb-2">50+</h3>
+                    <h5>Countries Featured</h5>
+                    <p class="text-muted">Recipes and stories from around the globe</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-4">
+                    <h3 class="display-4 text-primary mb-2">200+</h3>
+                    <h5>Authentic Recipes</h5>
+                    <p class="text-muted">Traditional and modern interpretations</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="p-4">
+                    <h3 class="display-4 text-primary mb-2">100+</h3>
+                    <h5>Cultural Stories</h5>
+                    <p class="text-muted">Personal narratives and traditions</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="p-4">
+                    <h3 class="display-4 text-primary mb-2">10K+</h3>
+                    <h5>Community Members</h5>
+                    <p class="text-muted">Global food enthusiasts connected</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="py-5 team-section" style="margin-bottom: 0 !important;">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Meet Our Team</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card border-0 shadow">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face" 
+                         class="card-img-top rounded-circle mx-auto mt-4" style="width: 150px; height: 150px; object-fit: cover;" alt="Team member">
+                    <div class="card-body text-center">
+                        <h5>Maria Rodriguez</h5>
+                        <p class="text-muted">Founder & Editorial Director</p>
+                        <p class="small">Passionate about preserving culinary traditions and connecting cultures through food storytelling.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card border-0 shadow">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" 
+                         class="card-img-top rounded-circle mx-auto mt-4" style="width: 150px; height: 150px; object-fit: cover;" alt="Team member">
+                    <div class="card-body text-center">
+                        <h5>Ahmed Hassan</h5>
+                        <p class="text-muted">Cultural Research Coordinator</p>
+                        <p class="small">Specializes in Middle Eastern and North African cuisines, with expertise in historical food traditions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card border-0 shadow">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face" 
+                         class="card-img-top rounded-circle mx-auto mt-4" style="width: 150px; height: 150px; object-fit: cover;" alt="Team member">
+                    <div class="card-body text-center">
+                        <h5>Li Wei</h5>
+                        <p class="text-muted">Recipe Development Chef</p>
+                        <p class="small">Expert in Asian cuisines with a focus on authentic preparation methods and ingredient sourcing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section" style="background: linear-gradient(135deg, #ff8c00, #ff6b35); margin-top: 3rem !important; padding: 4rem 0 !important;">
+    <div class="container text-center text-white">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h2 class="mb-4">Join Our Mission</h2>
+                <p class="lead mb-4">
+                    Help us preserve and share the world's culinary heritage. Whether you have a family recipe, a cultural story, or simply a passion for authentic food, we want to hear from you.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg">
+                        <i class="fas fa-plus me-2"></i>Share Your Story
+                    </a>
+                    <a href="{% url 'recipes' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-utensils me-2"></i>Explore Recipes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

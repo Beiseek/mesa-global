@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+
+{% block title %}Cultural Stories & Food Articles - Mesa Global{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                <h1 class="display-5 mb-4">Cultural Stories & Food Articles</h1>
+                <p class="lead">
+                    Explore inspiring stories about food culture, interviews with chefs, and articles about culinary traditions from around the world
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filters Section -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <form method="get" class="row g-3 align-items-end" id="filter-form">
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label">Article Type</label>
+                <select name="type" class="form-select" onchange="this.form.submit()">
+                    <option value="all" {% if current_type == 'all' %}selected{% endif %}>All Types</option>
+                    {% for value, display in article_types %}
+                        <option value="{{ value }}" {% if current_type == value %}selected{% endif %}>
+                            {{ display }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-2">
+                {% if current_type != 'all' %}
+                <a href="{% url 'articles' %}" class="btn btn-outline-secondary w-100">Clear</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Articles Grid -->
+<section class="py-5">
+    <div class="container">
+        {% if articles %}
+            <div class="row">
+                {% for article in articles %}
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                    <article class="card h-100 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-5">
+                                {% if article.featured_image %}
+                                    <img src="{{ article.featured_image.url }}" class="img-fluid h-100" 
+                                         alt="{{ article.title }}" style="object-fit: cover; min-height: 250px;">
+                                {% else %}
+                                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=250&fit=crop&crop=center" class="img-fluid h-100" 
+                                         alt="{{ article.title }}" style="object-fit: cover; min-height: 250px;">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body d-flex flex-column h-100">
+                                    <div class="mb-2">
+                                        <span class="badge bg-{{ article.article_type|default:'primary' }} mb-2">
+                                            {{ article.get_article_type_display }}
+                                        </span>
+                                        {% if article.region %}
+                                            <span class="badge bg-outline-secondary">{{ article.region.name }}</span>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <h5 class="card-title">
+                                        <a href="{{ article.get_absolute_url }}" class="text-decoration-none text-dark">
+                                            {{ article.title }}
+                                        </a>
+                                    </h5>
+                                    
+                                    {% if article.author_name %}
+                                        <p class="small text-muted mb-2">
+                                            <i class="fas fa-user me-1"></i>{{ article.author_name }}
+                                        </p>
+                                    {% endif %}
+                                    
+                                    <p class="card-text flex-grow-1">{{ article.excerpt|truncatewords:25 }}</p>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i>{{ article.created_at|date:"M d, Y" }}
+                                        </small>
+                                        <a href="{{ article.get_absolute_url }}" class="btn btn-outline-primary btn-sm">
+                                            Read Story <i class="fas fa-arrow-right ms-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            {% if articles.has_other_pages %}
+            <nav aria-label="Articles pagination" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    {% if articles.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% if current_type != 'all' %}type={{ current_type }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}page={{ articles.previous_page_number }}">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    {% for num in articles.paginator.page_range %}
+                        {% if articles.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% elif num > articles.number|add:'-3' and num < articles.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?{% if current_type != 'all' %}type={{ current_type }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if articles.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% if current_type != 'all' %}type={{ current_type }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}page={{ articles.next_page_number }}">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        {% else %}
+            <!-- No Results -->
+            <div class="text-center py-5">
+                <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
+                <h3>No articles found</h3>
+                <p class="text-muted">Try adjusting your search terms or browse all article types</p>
+                <a href="{% url 'articles' %}" class="btn btn-primary">View All Articles</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Article Types Guide -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Explore Different Story Types</h2>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-heart fa-3x text-primary mb-3"></i>
+                        <h5>Personal Stories</h5>
+                        <p class="small text-muted">Heartwarming tales about what food means to individuals and families</p>
+                        <a href="?type=story" class="btn btn-outline-primary btn-sm">Read Stories</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-microphone fa-3x text-primary mb-3"></i>
+                        <h5>Chef Interviews</h5>
+                        <p class="small text-muted">Conversations with renowned chefs, home cooks, and culinary experts</p>
+                        <a href="?type=interview" class="btn btn-outline-primary btn-sm">Read Interviews</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-landmark fa-3x text-primary mb-3"></i>
+                        <h5>Cultural Articles</h5>
+                        <p class="small text-muted">Deep dives into food traditions, customs, and historical contexts</p>
+                        <a href="?type=culture" class="btn btn-outline-primary btn-sm">Read Articles</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-pen fa-3x text-primary mb-3"></i>
+                        <h5>Blog Posts</h5>
+                        <p class="small text-muted">Insights on food trends, cultural observations, and culinary commentary</p>
+                        <a href="?type=blog" class="btn btn-outline-primary btn-sm">Read Blog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Story Submission CTA -->
+<section class="py-5">
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h3 class="mb-4">Have a story to tell?</h3>
+                <p class="lead mb-4">
+                    Share your food memories, cultural traditions, or culinary experiences with our global community.
+                </p>
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus me-2"></i>Submit Your Story
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card:hover {
+        transform: translateY(-2px);
+    }
+    
+    .card .btn {
+        transition: all 0.3s ease;
+    }
+    
+    .badge.bg-story { background-color: #e74c3c !important; }
+    .badge.bg-interview { background-color: #3498db !important; }
+    .badge.bg-culture { background-color: #9b59b6 !important; }
+    .badge.bg-blog { background-color: #27ae60 !important; }
+</style>
+{% endblock %}

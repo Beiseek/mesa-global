@@ -1,0 +1,374 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} - Mesa Global{% endblock %}
+
+{% block content %}
+<!-- Article Header -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'articles' %}">Stories</a></li>
+                        {% if article.region %}
+                            <li class="breadcrumb-item"><a href="{% url 'region_detail' article.region.slug %}">{{ article.region.name }}</a></li>
+                        {% endif %}
+                        <li class="breadcrumb-item active">{{ article.title }}</li>
+                    </ol>
+                </nav>
+                
+                <!-- Article Meta -->
+                <div class="text-center mb-4" data-aos="fade-up">
+                    <div class="mb-3">
+                        <span class="badge bg-{{ article.article_type|default:'primary' }} me-2">
+                            {{ article.get_article_type_display }}
+                        </span>
+                        {% if article.region %}
+                            <span class="badge bg-outline-secondary">{{ article.region.name }}</span>
+                        {% endif %}
+                    </div>
+                    <h1 class="display-5 mb-3">{{ article.title }}</h1>
+                    <p class="lead text-muted">{{ article.excerpt }}</p>
+                    
+                    <!-- Article Info -->
+                    <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 text-muted">
+                        {% if article.author_name %}
+                            <span><i class="fas fa-user me-2"></i>{{ article.author_name }}</span>
+                        {% endif %}
+                        <span><i class="fas fa-calendar me-2"></i>{{ article.created_at|date:"F d, Y" }}</span>
+                        <span><i class="fas fa-clock me-2"></i>5 min read</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Image -->
+<section class="mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="position-relative" data-aos="fade-up">
+                    {% if article.featured_image %}
+                        <img src="{{ article.featured_image.url }}" alt="{{ article.title }}" 
+                             class="img-fluid rounded-3 shadow-lg w-100" style="height: 500px; object-fit: cover;">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=500&fit=crop&crop=center" alt="{{ article.title }}" 
+                             class="img-fluid rounded-3 shadow-lg w-100" style="height: 500px; object-fit: cover;">
+                    {% endif %}
+                    <div class="position-absolute top-0 start-0 w-100 h-100 ethnic-pattern rounded-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Article Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Main Content -->
+                <article class="content-article" data-aos="fade-up">
+                    {{ article.content|safe }}
+                </article>
+                
+                <!-- Author Bio (for interviews) -->
+                {% if article.author_bio and article.author_name %}
+                <div class="mt-5" data-aos="fade-up">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-user-circle me-2"></i>About {{ article.author_name }}
+                            </h5>
+                            <p class="card-text">{{ article.author_bio }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Tags -->
+                {% if article.tags.all %}
+                <div class="mt-4" data-aos="fade-up">
+                    <h6 class="mb-3">Related Topics</h6>
+                    {% for tag in article.tags.all %}
+                        <span class="badge bg-secondary me-2 mb-2">{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <!-- Share Section -->
+                <div class="mt-5 pt-4 border-top" data-aos="fade-up">
+                    <h6 class="mb-3">Share this story</h6>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button class="btn btn-outline-primary btn-sm" onclick="shareArticle()">
+                            <i class="fas fa-link me-1"></i>Copy Link
+                        </button>
+                        <a href="#" class="btn btn-outline-success btn-sm" onclick="shareToWhatsApp()">
+                            <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                        </a>
+                        <a href="#" class="btn btn-outline-info btn-sm" onclick="shareToFacebook()">
+                            <i class="fab fa-facebook me-1"></i>Facebook
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm" onclick="shareToTwitter()">
+                            <i class="fab fa-twitter me-1"></i>Twitter
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top: 120px;">
+                    <!-- Article Info Card -->
+                    <div class="card mb-4" data-aos="fade-left">
+                        <div class="card-header text-white" style="background: linear-gradient(135deg, #ff8c00, #ff6b35);">
+                            <h6 class="mb-0"><i class="fas fa-info-circle me-2"></i>Article Info</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <strong class="d-block text-muted small">Type</strong>
+                                {{ article.get_article_type_display }}
+                            </div>
+                            {% if article.region %}
+                            <div class="mb-3">
+                                <strong class="d-block text-muted small">Region</strong>
+                                <a href="{% url 'region_detail' article.region.slug %}" class="text-decoration-none">
+                                    {{ article.region.name }}
+                                </a>
+                            </div>
+                            {% endif %}
+                            <div class="mb-3">
+                                <strong class="d-block text-muted small">Published</strong>
+                                {{ article.created_at|date:"F d, Y" }}
+                            </div>
+                            {% if article.author_name %}
+                            <div>
+                                <strong class="d-block text-muted small">Author</strong>
+                                {{ article.author_name }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery -->
+                    {% if article.gallery_image_1 or article.gallery_image_2 %}
+                    <div class="card mb-4" data-aos="fade-left" data-aos-delay="100">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-images me-2"></i>Gallery</h6>
+                        </div>
+                        <div class="card-body p-2">
+                            <div class="row g-2">
+                                {% if article.gallery_image_1 %}
+                                <div class="col-6">
+                                    <img src="{{ article.gallery_image_1.url }}" alt="{{ article.title }}" 
+                                         class="img-fluid rounded cursor-pointer" data-bs-toggle="modal" data-bs-target="#galleryModal"
+                                         data-bs-img="{{ article.gallery_image_1.url }}">
+                                </div>
+                                {% endif %}
+                                {% if article.gallery_image_2 %}
+                                <div class="col-6">
+                                    <img src="{{ article.gallery_image_2.url }}" alt="{{ article.title }}" 
+                                         class="img-fluid rounded cursor-pointer" data-bs-toggle="modal" data-bs-target="#galleryModal"
+                                         data-bs-img="{{ article.gallery_image_2.url }}">
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Newsletter Signup -->
+                    <div class="card mb-4" data-aos="fade-left" data-aos-delay="200">
+                        <div class="card-header text-white" style="background: linear-gradient(135deg, #ff8c00, #ff6b35);">
+                            <h6 class="mb-0"><i class="fas fa-envelope me-2"></i>Stay Updated</h6>
+                        </div>
+                        <div class="card-body">
+                            <p class="small mb-3">Get the latest stories and recipes delivered to your inbox</p>
+                            <form>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Your email address">
+                                </div>
+                                <button type="submit" class="btn w-100" style="background: linear-gradient(135deg, #ff8c00, #ff6b35); color: white;">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Related Articles -->
+                    <div class="card" data-aos="fade-left" data-aos-delay="300">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-book me-2"></i>Related Stories</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <a href="{% url 'articles' %}?type={{ article.article_type }}" class="btn btn-outline-primary btn-sm">
+                                    More {{ article.get_article_type_display|lower }}s
+                                </a>
+                                {% if article.region %}
+                                <a href="{% url 'region_detail' article.region.slug %}" class="btn btn-outline-secondary btn-sm">
+                                    More from {{ article.region.name }}
+                                </a>
+                                {% endif %}
+                                <a href="{% url 'articles' %}" class="btn btn-outline-dark btn-sm">
+                                    All Stories
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Articles -->
+{% if related_articles %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Related Stories</h2>
+        <div class="row">
+            {% for related in related_articles %}
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                <div class="card h-100">
+                    {% if related.featured_image %}
+                        <img src="{{ related.featured_image.url }}" class="card-img-top" alt="{{ related.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop&crop=center" class="card-img-top" alt="{{ related.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-{{ related.article_type|default:'primary' }} mb-2 align-self-start">
+                            {{ related.get_article_type_display }}
+                        </span>
+                        <h6 class="card-title">{{ related.title }}</h6>
+                        <p class="card-text small text-muted flex-grow-1">{{ related.excerpt|truncatewords:15 }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">{{ related.created_at|date:"M d" }}</small>
+                            <a href="{{ related.get_absolute_url }}" class="btn btn-primary btn-sm">Read</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Gallery Modal -->
+<div class="modal fade" id="galleryModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <img src="" alt="" class="img-fluid w-100" id="modalImage">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .content-article {
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+    
+    .content-article h2, .content-article h3 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--secondary-color);
+    }
+    
+    .content-article p {
+        margin-bottom: 1.5rem;
+    }
+    
+    .content-article blockquote {
+        border-left: 4px solid var(--primary-color);
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+        font-style: italic;
+        background: var(--background-cream);
+        padding: 1rem 1.5rem;
+        border-radius: 0 8px 8px 0;
+    }
+    
+    .content-article img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+    
+    .cursor-pointer {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+    
+    .cursor-pointer:hover {
+        transform: scale(1.05);
+    }
+    
+    .badge.bg-story { background-color: #e74c3c !important; }
+    .badge.bg-interview { background-color: #3498db !important; }
+    .badge.bg-culture { background-color: #9b59b6 !important; }
+    .badge.bg-blog { background-color: #27ae60 !important; }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Gallery modal functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const galleryModal = document.getElementById('galleryModal');
+        if (galleryModal) {
+            galleryModal.addEventListener('show.bs.modal', function(event) {
+                const trigger = event.relatedTarget;
+                const imgSrc = trigger.getAttribute('data-bs-img');
+                const modalImage = document.getElementById('modalImage');
+                modalImage.src = imgSrc;
+            });
+        }
+    });
+    
+    // Share functionality
+    function shareArticle() {
+        const url = window.location.href;
+        if (navigator.share) {
+            navigator.share({
+                title: '{{ article.title }}',
+                text: '{{ article.excerpt }}',
+                url: url
+            });
+        } else if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(function() {
+                alert('Link copied to clipboard!');
+            });
+        }
+    }
+    
+    function shareToWhatsApp() {
+        const url = window.location.href;
+        const text = encodeURIComponent('{{ article.title }} - {{ article.excerpt|truncatewords:20 }}');
+        window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+    }
+    
+    function shareToFacebook() {
+        const url = window.location.href;
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    }
+    
+    function shareToTwitter() {
+        const url = window.location.href;
+        const text = encodeURIComponent('{{ article.title }}');
+        window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+    }
+</script>
+{% endblock %}

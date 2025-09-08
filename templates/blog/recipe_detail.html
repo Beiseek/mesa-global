@@ -1,0 +1,346 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe.title }} - Mesa Global{% endblock %}
+
+{% block content %}
+<!-- Recipe Header -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'recipes' %}">Recipes</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'region_detail' recipe.region.slug %}">{{ recipe.region.name }}</a></li>
+                        <li class="breadcrumb-item active">{{ recipe.title }}</li>
+                    </ol>
+                </nav>
+                
+                <!-- Recipe Title & Meta -->
+                <div class="text-center mb-4" data-aos="fade-up">
+                    <span class="badge mb-2" style="background: linear-gradient(135deg, #ff8c00, #ff6b35);">{{ recipe.region.name }}</span>
+                    <h1 class="display-5 mb-3">{{ recipe.title }}</h1>
+                    <p class="lead text-muted">{{ recipe.description }}</p>
+                    
+                    <!-- Recipe Stats -->
+                    <div class="row text-center mt-4">
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-prep fa-2x text-primary mb-2"></i>
+                                <strong>{{ recipe.prep_time }} min</strong>
+                                <small class="text-muted">Prep Time</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-fire fa-2x text-primary mb-2"></i>
+                                <strong>{{ recipe.cook_time }} min</strong>
+                                <small class="text-muted">Cook Time</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                                <strong>{{ recipe.servings }}</strong>
+                                <small class="text-muted">Servings</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-chart-bar fa-2x text-primary mb-2"></i>
+                                <strong>{{ recipe.get_difficulty_display }}</strong>
+                                <small class="text-muted">Difficulty</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Image -->
+<section class="mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="position-relative" data-aos="fade-up">
+                    {% if recipe.featured_image %}
+                        <img src="{{ recipe.featured_image.url }}" alt="{{ recipe.title }}" 
+                             class="img-fluid rounded-3 shadow-lg w-100" style="height: 500px; object-fit: cover;">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=500&fit=crop&crop=center" alt="{{ recipe.title }}" 
+                             class="img-fluid rounded-3 shadow-lg w-100" style="height: 500px; object-fit: cover;">
+                    {% endif %}
+                    <div class="position-absolute top-0 start-0 w-100 h-100 ethnic-pattern rounded-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recipe Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- History Section -->
+                <div class="mb-5" data-aos="fade-up">
+                    <h2 class="section-title text-start">The Story Behind the Dish</h2>
+                    <div class="content-text">
+                        {{ recipe.history|safe }}
+                    </div>
+                </div>
+                
+                <!-- Ingredients Section -->
+                <div class="mb-5" data-aos="fade-up">
+                    <h2 class="section-title text-start">Ingredients</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            {{ recipe.ingredients|safe }}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Instructions Section -->
+                <div class="mb-5" data-aos="fade-up">
+                    <h2 class="section-title text-start">Instructions</h2>
+                    <div class="content-text">
+                        {{ recipe.instructions|safe }}
+                    </div>
+                </div>
+                
+                <!-- Cultural Context -->
+                <div class="mb-5" data-aos="fade-up">
+                    <h2 class="section-title text-start">Cultural Context</h2>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            {{ recipe.cultural_context|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top: 120px;">
+                    <!-- Quick Info Card -->
+                    <div class="card mb-4" data-aos="fade-left">
+                        <div class="card-header text-white" style="background: linear-gradient(135deg, #ff8c00, #ff6b35);">
+                            <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Quick Info</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-6 mb-3">
+                                    <strong class="d-block">{{ recipe.total_time }}</strong>
+                                    <small class="text-muted">Total Time</small>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <strong class="d-block">{{ recipe.servings }}</strong>
+                                    <small class="text-muted">Servings</small>
+                                </div>
+                                <div class="col-6">
+                                    <strong class="d-block">{{ recipe.category.name }}</strong>
+                                    <small class="text-muted">Category</small>
+                                </div>
+                                <div class="col-6">
+                                    <strong class="d-block">{{ recipe.get_difficulty_display }}</strong>
+                                    <small class="text-muted">Level</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tags -->
+                    {% if recipe.tags.all %}
+                    <div class="card mb-4" data-aos="fade-left" data-aos-delay="100">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-tags me-2"></i>Tags</h6>
+                        </div>
+                        <div class="card-body">
+                            {% for tag in recipe.tags.all %}
+                                <span class="badge bg-secondary me-1 mb-1">{{ tag.name }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Gallery -->
+                    {% if recipe.gallery_image_1 or recipe.gallery_image_2 or recipe.gallery_image_3 %}
+                    <div class="card mb-4" data-aos="fade-left" data-aos-delay="200">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-images me-2"></i>Gallery</h6>
+                        </div>
+                        <div class="card-body p-2">
+                            <div class="row g-2">
+                                {% if recipe.gallery_image_1 %}
+                                <div class="col-4">
+                                    <img src="{{ recipe.gallery_image_1.url }}" alt="{{ recipe.title }}" 
+                                         class="img-fluid rounded cursor-pointer" data-bs-toggle="modal" data-bs-target="#galleryModal"
+                                         data-bs-img="{{ recipe.gallery_image_1.url }}">
+                                </div>
+                                {% endif %}
+                                {% if recipe.gallery_image_2 %}
+                                <div class="col-4">
+                                    <img src="{{ recipe.gallery_image_2.url }}" alt="{{ recipe.title }}" 
+                                         class="img-fluid rounded cursor-pointer" data-bs-toggle="modal" data-bs-target="#galleryModal"
+                                         data-bs-img="{{ recipe.gallery_image_2.url }}">
+                                </div>
+                                {% endif %}
+                                {% if recipe.gallery_image_3 %}
+                                <div class="col-4">
+                                    <img src="{{ recipe.gallery_image_3.url }}" alt="{{ recipe.title }}" 
+                                         class="img-fluid rounded cursor-pointer" data-bs-toggle="modal" data-bs-target="#galleryModal"
+                                         data-bs-img="{{ recipe.gallery_image_3.url }}">
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Share -->
+                    <div class="card" data-aos="fade-left" data-aos-delay="300">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-share me-2"></i>Share Recipe</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="shareRecipe()">
+                                    <i class="fas fa-link me-2"></i>Copy Link
+                                </button>
+                                <a href="#" class="btn btn-outline-success btn-sm">
+                                    <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                                </a>
+                                <a href="#" class="btn btn-outline-info btn-sm">
+                                    <i class="fab fa-facebook me-2"></i>Facebook
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Recipes -->
+{% if related_recipes %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">More from {{ recipe.region.name }}</h2>
+        <div class="row">
+            {% for related in related_recipes %}
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                <div class="card h-100">
+                    {% if related.featured_image %}
+                        <img src="{{ related.featured_image.url }}" class="card-img-top" alt="{{ related.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop&crop=center" class="card-img-top" alt="{{ related.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title">{{ related.title }}</h6>
+                        <p class="card-text small text-muted flex-grow-1">{{ related.description|truncatewords:10 }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-muted">{{ related.total_time }} min</small>
+                            <a href="{{ related.get_absolute_url }}" class="btn btn-primary btn-sm">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Gallery Modal -->
+<div class="modal fade" id="galleryModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <img src="" alt="" class="img-fluid w-100" id="modalImage">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .content-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+    
+    .content-text ul, .content-text ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .content-text li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .cursor-pointer {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+    
+    .cursor-pointer:hover {
+        transform: scale(1.05);
+    }
+    
+    .section-title.text-start::after {
+        left: 0;
+        transform: none;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Gallery modal functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const galleryModal = document.getElementById('galleryModal');
+        if (galleryModal) {
+            galleryModal.addEventListener('show.bs.modal', function(event) {
+                const trigger = event.relatedTarget;
+                const imgSrc = trigger.getAttribute('data-bs-img');
+                const modalImage = document.getElementById('modalImage');
+                modalImage.src = imgSrc;
+            });
+        }
+    });
+    
+    // Share recipe functionality
+    function shareRecipe() {
+        const url = window.location.href;
+        if (navigator.share) {
+            navigator.share({
+                title: '{{ recipe.title }}',
+                text: '{{ recipe.description }}',
+                url: url
+            });
+        } else if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(function() {
+                alert('Link copied to clipboard!');
+            });
+        } else {
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = url;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Link copied to clipboard!');
+        }
+    }
+</script>
+{% endblock %}
