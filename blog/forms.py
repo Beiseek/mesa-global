@@ -17,7 +17,7 @@ class ContactSubmissionForm(forms.ModelForm):
             }),
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'your.email@example.com'
+                'placeholder': 'aledariabr@gmail.com'
             }),
             'title': forms.TextInput(attrs={
                 'class': 'form-control',

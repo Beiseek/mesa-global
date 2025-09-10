@@ -205,7 +205,7 @@ def contact(request):
                     f'Регион: {submission.region}\n\n'
                     f'Описание: {submission.description}',
                     settings.DEFAULT_FROM_EMAIL,
-                    ['admin@mesaglobal.com'],
+                    ['aledariabr@gmail.com'],
                     fail_silently=True,
                 )
             except:
